@@ -101,7 +101,7 @@ main() {
 		source "$config_dir/cfg"
 	else
 		echo "Please configure cfg with option 5. Defaulting editor to \"$EDITOR\" for now, but please verify it is correct before viewing/editing any configs."
-		echo "ed=$EDITOR" > "$config_dir/cfg" # Default to $EDITOR.
+		export ed="$EDITOR" && echo "ed=$EDITOR" > "$config_dir/cfg" # Default to $EDITOR.
 		sleep 5
 	fi
     [ ! -d "$backup_dir" ] && mkdir -pv "$backup_dir" # Create backup directory if non-existent.
