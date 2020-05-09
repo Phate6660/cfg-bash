@@ -30,7 +30,7 @@ $add_template"
 }
 
 ## Edit a config.
-## TO-DO: Lines 36-40 and 48-52 could be better.
+## TO-DO: Lines 36-40 and 49-53 could be better.
 edc() {
 	clear
 	echo "Here are the available configurations:
@@ -43,6 +43,7 @@ $(ls -1 "$config_dir" | cat -n)"
 	main_loop
 }
 
+## Backup a config.
 bac() {
 	clear
 	echo "Here are the available configurations:
