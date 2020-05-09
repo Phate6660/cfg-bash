@@ -16,15 +16,21 @@ adc() {
 	add_template="app=$app
 type=$type
 file=$file"
-	echo "$add_template" > "$config_dir/$app"
-	echo "Configuration file added:
+	if [ -n "$type" ]; then
+        echo "$add_template" > "$config_dir/$app-$type"
+		echo "Configuration file added ($config_dir/$app-$type):
 $add_template"
+	else
+		echo "$add_template" > "$config_dir/$app"
+		echo "Configuration file added ($config_dir/$app):
+$add_template"
+	fi
 	read -p "Press [ENTER] to return to main menu."
 	main_loop
 }
 
 ## Edit a config.
-## TO-DO: Lines 30-34 and 42-46 could be better.
+## TO-DO: Lines 36-40 and 48-52 could be better.
 edc() {
 	clear
 	echo "Here are the available configurations:

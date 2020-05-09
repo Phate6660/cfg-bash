@@ -17,8 +17,8 @@ What is implemented:
 - Adding configs to manage
 - Viewing / Editing configs
 - Backing up configs
+- Files named "program name - type of config" (if applicable) to avoid collision of two configs from same program
 
 What is planned:
-- Files named "program name - type of config" to avoid collision of two configs from same program
 - Removing configs (from either being managed or the filesystem)
 - Version control(?) -- I wouldn't be too interested, but I'm sure others would be interested in this if I implemented it
