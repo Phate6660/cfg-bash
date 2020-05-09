@@ -5,7 +5,7 @@
 ## Created by: Phate6660 (https://github.com/Phate6660).
 
 config_dir="$HOME/.config/cfg" # Set the config dir globally
-backup_dir="$HOME/.local/share/cfg/" # Set the dir for configs to be backed up to globally
+backup_dir="$HOME/.local/share/cfg" # Set the dir for configs to be backed up to globally
 
 ## Add config(s) to manage.
 adc() {
