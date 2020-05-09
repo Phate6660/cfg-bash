@@ -3,7 +3,7 @@ A configuration manager written in bash.
 
 ## How it works
 1. Configuration directory is created (`$HOME/.config/cfg`) if non-existent.
-2. If configuration (`$HOME/.config/cfg/cfg`) is non-existent, ask user to configure cfg.
+2. If configuration (`$HOME/.config/cfg/cfg`) is non-existent, ask user to configure cfg (but default the editor to `$EDITOR` anyways).
 3. When adding a new config to manage, it is saved to the config dir under the name of "app" or "app-type", with the contents:
 ```
 app=program name
