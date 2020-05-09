@@ -1,0 +1,85 @@
+#!/bin/bash
+## A confifguration manager.
+## There are no defaults, it only tracks user-inputted configs.
+## The following functionality is planned: editing, backing up, and removing.
+## Created by: Phate6660 (https://github.com/Phate6660).
+
+config_dir="$HOME/.config/cfg" # Set the config dir globally
+
+## Add config(s) to manage.
+adc() {
+	clear
+	read -p "Please enter the name of the application: " app
+	read -p "Please enter the type of config (e.g. general, input, etc) if applicable: " type
+	read -p "Please enter the location of the config file: " file
+	add_template="app=$app
+type=$type
+file=$file"
+	echo "$add_template" > "$config_dir/$app"
+	echo "Configuration file added:
+$add_template"
+	read -p "Press [ENTER] to return to main menu."
+	main_loop
+}
+
+## Edit a config.
+## TO-DO: This could be much better.
+edc() {
+	clear
+	echo "Here are the available configurations:
+$(ls -1 "$config_dir" | cat -n)"
+	read -p "Which configuration would you like to edit? " conf
+	filename="$(ls -1 "$config_dir" | cat -n | grep "$conf" | awk -F\  '{print $2}')"
+	file="$(grep file "$config_dir"/"$filename" | awk -F= '{print $2}')"
+	"$ed" "$file"
+	read -p "Press [ENTER] to return to main menu."
+	main_loop
+}
+
+## Configure cfg.
+con() {
+	echo "Current configuration:
+CONFIG = $config_dir/cfg
+EDITOR = $ed
+
+Choices:
+1) Set the editor
+2) Return to main menu"
+	read -p "What would you like to do? " choice
+	case $choice in
+		1) read -p "Please input the path to the binary of the editor (e.g. /usr/bin/emacs): " ed && export ed && echo "ed=$ed" > "$config_dir/cfg" && con;;
+		2) main_loop;;
+	esac
+}
+
+## Main Menu
+main_loop() {
+	clear
+    echo "What would you like to do?
+1) Add a configuration file
+2) Edit a configuration file
+3) Backup a configuration file
+4) Remove a configuration file
+5) Configure cfg
+6) Exit"
+	read -p "> " ans
+	case $ans in
+		1) adc;;
+		2) edc;;
+		3) bac;;
+		4) rec;;
+		5) con;;
+		6) clear && exit 0;;
+	esac
+}
+
+## Initial checks for the config dir and config.
+main() {
+	clear
+	[ ! -d "$config_dir" ] && mkdir -pv "$config_dir" # Create configuration directory if non-existent.
+	if test -e "$config_dir/cfg"; then source "$config_dir/cfg"; else echo "Please configure cfg with option 5." && sleep 5; fi # Ask user to configure cfg to set the editor.
+	main_loop
+}
+
+## Do stuff
+main
