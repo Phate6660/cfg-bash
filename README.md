@@ -4,14 +4,14 @@ A configuration manager written in bash.
 ## How it works
 1. Configuration directory is created (`$HOME/.config/cfg`) if non-existent.
 2. If configuration (`$HOME/.config/cfg/cfg`) is non-existent, ask user to configure cfg.
-3. When adding a new config to manage, it is saved to the config dir under the name of the application, with the contents:
+3. When adding a new config to manage, it is saved to the config dir under the name of "app" or "app-type", with the contents:
 ```
 app=program name
 type=type of config
 file=/path/to/file
 ```
 4. Listing tracked configs is as simple as `ls $HOME/.config/cfg` since all files are named as the program and optionally contain an appended config type.
-5. When configurations are backed up, they are copied to `$HOME/.local/share/cfg` named with the same scheme explained below.
+5. When configurations are backed up, they are copied to `$HOME/.local/share/cfg`.
 
 ## Implemented / Planned
 What is implemented:
