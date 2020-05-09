@@ -10,7 +10,7 @@ app=program name
 type=type of config
 file=/path/to/file
 ```
-4. Listing tracked configs is as simple as `ls $HOME/.config/cfg` since all files are named as the program and optionally contain an appended config type
+4. Listing tracked configs is as simple as `ls $HOME/.config/cfg` since all files are named as the program and optionally contain an appended config type.
 5. When configurations are backed up, they are copied to `$HOME/.local/share/cfg` named with the same scheme explained below.
 
 ## Implemented / Planned
