@@ -5,6 +5,7 @@
 ## Created by: Phate6660 (https://github.com/Phate6660).
 
 config_dir="$HOME/.config/cfg" # Set the config dir globally
+backup_dir="$HOME/.local/share/cfg/" # Set the dir for configs to be backed up to globally
 
 ## Add config(s) to manage.
 adc() {
@@ -23,7 +24,7 @@ $add_template"
 }
 
 ## Edit a config.
-## TO-DO: This could be much better.
+## TO-DO: Lines 30-34 and 42-46 could be better.
 edc() {
 	clear
 	echo "Here are the available configurations:
@@ -33,6 +34,18 @@ $(ls -1 "$config_dir" | cat -n)"
 	file="$(grep file "$config_dir"/"$filename" | awk -F= '{print $2}')"
 	"$ed" "$file"
 	read -p "Press [ENTER] to return to main menu."
+	main_loop
+}
+
+bac() {
+	clear
+	echo "Here are the available configurations:
+$(ls -1 "$config_dir" | cat -n)"
+	read -p "Which configuration would you like to edit? " conf
+	filename="$(ls -1 "$config_dir" | cat -n | grep "$conf" | awk -F\  '{print $2}')"
+	file="$(grep file "$config_dir"/"$filename" | awk -F= '{print $2}')"
+	cp "$file" "$backup_dir/$filename"
+	read -p "Configuration backed up to \"$backup_dir/$filename\". Press [ENTER] to return to main menu."
 	main_loop
 }
 
@@ -57,7 +70,7 @@ main_loop() {
 	clear
     echo "What would you like to do?
 1) Add a configuration file
-2) Edit a configuration file
+2) View / Edit a configuration file
 3) Backup a configuration file
 4) Remove a configuration file
 5) Configure cfg
@@ -78,6 +91,7 @@ main() {
 	clear
 	[ ! -d "$config_dir" ] && mkdir -pv "$config_dir" # Create configuration directory if non-existent.
 	if test -e "$config_dir/cfg"; then source "$config_dir/cfg"; else echo "Please configure cfg with option 5." && sleep 5; fi # Ask user to configure cfg to set the editor.
+    [ ! -d "$backup_dir" ] && mkdir -pv "$backup_dir" # Create backup directory if non-existent.
 	main_loop
 }
 
